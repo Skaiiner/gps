@@ -1,0 +1,6 @@
+# Comunicación con el iPhone por USB (usbmuxd + lockdownd + DVT).
+# pymobiledevice3 >= 4.14 trae soporte de Personalized DDI (iOS 17/18) y tunneld.
+pymobiledevice3>=4.14.0,<5
+
+# Congelado del sidecar para distribución (solo build).
+pyinstaller>=6.10.0 ; extra == "build"

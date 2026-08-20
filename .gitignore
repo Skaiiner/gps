@@ -1,0 +1,19 @@
+node_modules/
+out/
+release/
+dist/
+.DS_Store
+*.log
+
+# Python sidecar
+native/.venv/
+native/.python/
+native/build/
+native/dist/
+native/**/__pycache__/
+native/*.spec
+
+# Imágenes de disco de desarrollador cacheadas
+resources/DeveloperDiskImages/
+.env
+.env.local
