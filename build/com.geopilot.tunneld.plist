@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Servicio del sistema que mantiene vivo el túnel RemoteXPC de iOS 17+.
+
+  Corre como root porque crear la interfaz de red virtual sobre el cable USB
+  requiere privilegios; no hay forma de evitarlo. Sólo escucha en 127.0.0.1,
+  así que no queda expuesto a la red.
+
+  Se instala con scripts/install-tunneld.sh y se quita con --uninstall.
+-->
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.geopilot.tunneld</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/Applications/GeoPilot.app/Contents/Resources/bridge/geopilot-bridge</string>
+      <string>--tunneld</string>
+      <string>--host</string>
+      <string>127.0.0.1</string>
+      <string>--port</string>
+      <string>49151</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Si el túnel se cae (iPhone desconectado, error de red), launchd lo
+         relanza. El intervalo evita un bucle de reinicios si algo va mal. -->
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+
+    <key>StandardOutPath</key>
+    <string>/var/log/geopilot-tunneld.log</string>
+    <key>StandardErrorPath</key>
+    <string>/var/log/geopilot-tunneld.log</string>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+  </dict>
+</plist>

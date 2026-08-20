@@ -33,6 +33,8 @@ cd "$NATIVE"
   --hidden-import pymobiledevice3.services.mobile_image_mounter \
   --hidden-import pymobiledevice3.services.amfi \
   --hidden-import pymobiledevice3.remote.remote_service_discovery \
+  --hidden-import pymobiledevice3.tunneld.server \
+  --hidden-import daemonize \
   --paths . \
   bridge_main.py
 

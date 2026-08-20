@@ -134,6 +134,29 @@ native/.venv/bin/python -m pymobiledevice3 usbmux list
 native/.venv/bin/python -m pymobiledevice3 lockdown info
 ```
 
+### El túnel de iOS 17+ como servicio del sistema
+
+Por defecto el túnel hay que levantarlo en cada sesión (la app lo pide con un
+botón). Para que arranque solo con el Mac:
+
+```bash
+sudo bash scripts/install-tunneld.sh
+```
+
+Instala un `LaunchDaemon` que ejecuta el modo túnel del propio sidecar incluido
+en `/Applications/GeoPilot.app`, así que sigue funcionando aunque borres esta
+carpeta. Para quitarlo:
+
+```bash
+sudo bash scripts/install-tunneld.sh --uninstall
+```
+
+**Qué implica.** El servicio corre como root de forma permanente, porque crear
+la interfaz de red virtual sobre USB requiere privilegios y no hay alternativa.
+Sólo escucha en `127.0.0.1:49151`, nunca en la red. Si prefieres no tener un
+demonio con privilegios siempre activo, no lo instales y usa el botón de la
+app cuando lo necesites. Registro en `/var/log/geopilot-tunneld.log`.
+
 ### Empaquetado
 
 ```bash
