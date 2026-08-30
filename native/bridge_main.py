@@ -26,10 +26,23 @@ def run_tunneld() -> int:
     Es bloqueante a propósito; launchd es quien gestiona el ciclo de vida, así
     que no hay que demonizar por nuestra cuenta.
     """
+    argv = sys.argv[1:]
+
+    # --help NO debe arrancar nada. Sin esto, cualquier intento de consultar la
+    # ayuda deja un túnel corriendo indefinidamente, porque el modo se decide
+    # antes de mirar el resto de argumentos.
+    if "--help" in argv or "-h" in argv:
+        print(
+            "Uso: geopilot-bridge --tunneld [--host HOST] [--port PUERTO]\n"
+            "  Sirve el túnel RemoteXPC que iOS 17+ necesita. Requiere root.\n"
+            "  Por defecto: 127.0.0.1:49151",
+            file=sys.stderr,
+        )
+        return 0
+
     from pymobiledevice3.tunneld.server import TunneldRunner
 
     host, port = "127.0.0.1", 49151
-    argv = sys.argv[1:]
     if "--host" in argv:
         host = argv[argv.index("--host") + 1]
     if "--port" in argv:

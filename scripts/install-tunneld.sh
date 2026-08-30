@@ -39,9 +39,6 @@ if [ ! -x "$BRIDGE" ]; then
   exit 1
 fi
 
-echo "==> Comprobando que el binario soporta el modo túnel"
-"$BRIDGE" --tunneld --help >/dev/null 2>&1 || true
-
 # Si ya estaba cargado, se descarga antes para poder reinstalar limpiamente.
 launchctl bootout system "$PLIST" 2>/dev/null || true
 
