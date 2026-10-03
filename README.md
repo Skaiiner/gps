@@ -160,13 +160,28 @@ app cuando lo necesites. Registro en `/var/log/geopilot-tunneld.log`.
 ### Empaquetado
 
 ```bash
-npm run python:bundle   # congela el sidecar con PyInstaller (native/dist)
-npm run dist:mac        # .dmg universal (arm64 + x64)
-npm run dist:win        # instalador NSIS x64
+# macOS
+npm run python:bundle       # congela el sidecar con PyInstaller (native/dist)
+npm run dist:mac            # .dmg universal (arm64 + x64)
+
+# Windows (PowerShell)
+npm run python:bundle:win   # congela el sidecar con PyInstaller (native\dist)
+npm run dist:win            # instalador NSIS x64 (release\GeoPilot-<version>-setup.exe)
 ```
 
-`npm run python:bundle` es obligatorio antes de distribuir: sin él la app dependería de que el
-usuario final tenga Python instalado.
+`npm run python:bundle` / `python:bundle:win` son obligatorios antes de distribuir: sin ellos la
+app dependería de que el usuario final tenga Python instalado.
+
+**El empaquetado de cada plataforma debe ejecutarse en esa misma plataforma.** PyInstaller no
+compila de forma cruzada: un `.exe` de Windows sólo se puede generar en Windows, igual que el
+`.dmg` de macOS sólo se genera en macOS. Para tener ambos instaladores:
+
+1. En el Mac: `npm install && npm run python:setup && npm run python:bundle && npm run dist:mac`.
+2. En el PC Windows: `npm install`, luego `npm run python:setup:win` (PowerShell) y
+   `npm run python:bundle:win`, y por último `npm run dist:win`.
+
+El instalador queda en `release/GeoPilot-<versión>-setup.exe`; muévelo o cópialo al escritorio para
+tener un acceso directo con el que abrir GeoPilot sin pasar por la terminal.
 
 ---
 
