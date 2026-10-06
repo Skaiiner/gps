@@ -21,6 +21,7 @@
     "python:setup": "bash scripts/setup-python.sh",
     "python:setup:win": "powershell -ExecutionPolicy Bypass -File scripts/setup-python.ps1",
     "python:bundle": "bash scripts/bundle-python.sh",
+    "python:bundle:win": "powershell -ExecutionPolicy Bypass -File scripts/bundle-python.ps1",
     "pack": "npm run build && electron-builder --dir",
     "dist:mac": "npm run build && electron-builder --mac --x64 && npm run sign:mac",
     "dist:win": "npm run build && electron-builder --win --x64",
