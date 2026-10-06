@@ -285,7 +285,7 @@ muchos usuarios, conviene alojar OSRM y Nominatim propios o usar Mapbox.
 
 ## 7. Autor y créditos
 
-Desarrollado por **MDCL**. Publicado bajo licencia MIT (ver [LICENSE](LICENSE)).
+Desarrollado por **Skaiiner**. Publicado bajo licencia MIT (ver [LICENSE](LICENSE)).
 
 ### Construido sobre
 
